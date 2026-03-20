@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>florescence</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      overflow: hidden;
+      background: #0a0a0a;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      touch-action: manipulation;
+    }
+    
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+    
+    .ui-overlay {
+      position: fixed;
+      bottom: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+    
+    .bloom-count {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    
+    #bloomBtn {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+      background: radial-gradient(circle, rgba(255,255,255,0.08) 0%, transparent 70%);
+      color: #fff;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #bloomBtn::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 50%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,255,255,0.1), transparent);
+      animation: rotate 4s linear infinite;
+    }
+    
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+    
+    #bloomBtn:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      transform: scale(1.1);
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 70%);
+    }
+    
+    #bloomBtn:active {
+      transform: scale(0.95);
+    }
+    
+    #bloomBtn span {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .title {
+      position: fixed;
+      top: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.38);
+      font-size: 11px;
+      letter-spacing: 8px;
+      text-transform: lowercase;
+      font-weight: 300;
+      z-index: 10;
+      text-align: center;
+    }
+    
+    .color-name {
+      position: fixed;
+      top: 75px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+      letter-spacing: 2px;
+      z-index: 10;
+      transition: opacity 0.5s;
+      text-align: center;
+    }
+
+    .gesture-hint {
+      position: fixed;
+      left: 50%;
+      bottom: 164px;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 999px;
+      background: rgba(10, 10, 10, 0.42);
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 11px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      backdrop-filter: blur(12px);
+      z-index: 10;
+      transition: opacity 0.45s ease, transform 0.45s ease;
+      pointer-events: none;
+      text-align: center;
+      max-width: calc(100vw - 32px);
+    }
+
+    .gesture-hint.is-hidden {
+      opacity: 0;
+      transform: translateX(-50%) translateY(8px);
+    }
+
+    @media (max-width: 768px) {
+      .title {
+        top: 24px;
+        font-size: 12px;
+        letter-spacing: 4px;
+      }
+
+      .color-name {
+        top: 50px;
+        font-size: 11px;
+      }
+
+      .ui-overlay {
+        bottom: 24px;
+        width: calc(100vw - 32px);
+        gap: 10px;
+      }
+
+      .gesture-hint {
+        bottom: 118px;
+        font-size: 10px;
+        letter-spacing: 1.2px;
+        padding: 9px 12px;
+      }
+
+      .bloom-count {
+        font-size: 11px;
+        letter-spacing: 2px;
+      }
+
+      #bloomBtn {
+        width: 72px;
+        height: 72px;
+        font-size: 10px;
+        letter-spacing: 1.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="title">florescence</div>
+  <div class="color-name" id="colorName"></div>
+  <div class="gesture-hint" id="gestureHint">Drag to orbit • swipe up for top view</div>
+  
+  <div class="ui-overlay">
+    <div class="bloom-count">Bloom #<span id="bloomCount">0</span></div>
+    <button id="bloomBtn"><span>Bloom</span></button>
+  </div>
+  
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
