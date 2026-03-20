@@ -2,6 +2,8 @@
 
 > An infinite, interactive 3D flower built with WebGL — every bloom is a different flower.
 
+[![Live Demo](https://img.shields.io/badge/demo-live-ff69b4?style=for-the-badge&logo=github)](https://ayush4u.github.io/florescence/)
+
 ![florescence](https://img.shields.io/badge/three.js-r162-black?logo=three.js&logoColor=white)
 ![florescence](https://img.shields.io/badge/gsap-3.12-green?logo=greensock&logoColor=white)
 ![florescence](https://img.shields.io/badge/vite-5-646cff?logo=vite&logoColor=white)
@@ -101,14 +103,9 @@ florescence/
 
 ## Deployment
 
+Live at → **[ayush4u.github.io/florescence](https://ayush4u.github.io/florescence/)**
+
 The project deploys automatically to **GitHub Pages** via the included Actions workflow whenever you push to `main`.
-
-Live URL after setup: `https://YOUR_USERNAME.github.io/florescence/`
-
-To set up:
-1. Push this repo to GitHub as `florescence`
-2. Go to **Settings → Pages → Source** and select **GitHub Actions**
-3. Push to `main` — that's it
 
 ---
 
